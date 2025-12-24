@@ -1,7 +1,7 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.5.9"
-	id("io.spring.dependency-management") version "1.1.7"
+	alias(libs.plugins.spring.boot)
+	alias(libs.plugins.spring.dependency.management)
 }
 
 group = "com.example.poc"
@@ -19,9 +19,17 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	implementation(libs.spring.boot.starter.web)
+	// LangChain4j core + Ollama integration
+	implementation(libs.langchain4j.core)
+	implementation(libs.langchain4j.ollama)
+	// Jackson for DTOs
+	implementation(libs.jackson.databind)
+
+	testImplementation(libs.spring.boot.starter.test)
+	// Mockito for unit tests
+	testImplementation(libs.mockito.core)
+	testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.withType<Test> {
